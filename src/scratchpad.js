@@ -1,10 +1,11 @@
 import React from 'react';
 import Views from './buttons'
+//import Card from './card'
 
 class ScratchPad extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { items: [], text: '' };
+        this.state = { items: [], text: '', status: ''};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -61,7 +62,10 @@ class ScratchPad extends React.Component {
     }
 
     checkDone() {
-        ///When this is clicked, update 'status' to 'done'
+        console.log("function worked")
+        this.setState({
+            status: 'done'
+        })
     }
 
     clearList() {
@@ -76,7 +80,10 @@ class TodoList extends React.Component {
         return (
             <ul className="text-left">
                 {this.props.items.map(item => (
-                    <li key={item.id}>{item.text}</li>
+                    <li key={item.id} class="list-unstyled">
+                    <input type="checkbox" onClick={this.checkDone}></input>
+                    {item.text}
+                    </li>
                 ))}
             </ul>
         );

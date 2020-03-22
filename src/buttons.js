@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Views() {
+function Views(props) {
     return  (
         <div className="container">
             <div className="row">

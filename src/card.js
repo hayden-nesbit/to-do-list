@@ -5,15 +5,14 @@ class Card extends React.Component {
         super(props);
     }
 
-    render() {
+    render(props) {
         return (
             <div class="card w-75">
-                <div class="card-body">
-                    {this.props.items.map(item => (
-                        <h5 class="card-title" key={item.id}>{item.text}</h5>
-                        <a href="#" class="btn btn-primary"></a>
-                    </div>
+            <div class="card-body">
+              <h5 class="card-title" key={this.item.id}>{this.items.text}</h5>
+              <a href="#" class="btn btn-primary">Button</a>
             </div>
+          </div>
         )
     }
 
