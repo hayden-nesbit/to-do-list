@@ -1,4 +1,5 @@
 import React from 'react';
+import Views from './buttons'
 
 class ScratchPad extends React.Component {
     constructor(props) {
@@ -13,12 +14,8 @@ class ScratchPad extends React.Component {
         return (
             <div>
                 <h1 className="text-left">To-do</h1>
-                {/* <h5 className="text-left"><i>Most recent</i></h5> */}
                 <TodoList items={this.state.items} />
                 <form className="mb-5" onSubmit={this.handleSubmit}>
-                    {/* <label htmlFor="new-todo" className="h4">
-              I need to:
-            </label> */}
                     <input
                         id="new-todo"
                         onChange={this.handleChange}
@@ -28,6 +25,7 @@ class ScratchPad extends React.Component {
                         Add #{this.state.items.length + 1}
                     </button>
                 </form>
+                <Views />
             </div>
         );
     }
@@ -65,9 +63,13 @@ class ScratchPad extends React.Component {
     checkDone() {
         ///When this is clicked, update 'status' to 'done'
     }
+
+    clearList() {
+        ///When this is clicked, clear localStorage
+    }
 }
 
-
+    
 
 class TodoList extends React.Component {
     render() {
