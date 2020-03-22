@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Navbar from './Navbar'
+// import Navbar from './Navbar'
 
 //import Input from './input'
 // import TodoApp from './To-Do';
@@ -11,7 +11,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-      <Navbar />
+      {/* <Navbar /> */}
         <header className="App-header">
           <p>
             <ScratchPad />

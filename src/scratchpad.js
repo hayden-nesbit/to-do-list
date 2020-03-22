@@ -1,5 +1,4 @@
 import React from 'react';
-import { waitForElementToBeRemoved } from '@testing-library/react';
 
 class ScratchPad extends React.Component {
     constructor(props) {
@@ -33,11 +32,11 @@ class ScratchPad extends React.Component {
         );
     }
 
-    // componentDidMount() {
-    //     this.setState({
-    //         items: JSON.parse(window.localStorage.items)
-    //     })
-    // }
+    componentDidMount() {
+        this.setState({
+            items: JSON.parse(window.localStorage.items)
+        })
+    }
 
     handleChange(e) {
         this.setState({ text: e.target.value });
