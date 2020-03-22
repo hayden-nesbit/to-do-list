@@ -1,21 +1,25 @@
 import React from 'react';
 import './App.css';
+import Navbar from './Navbar'
 
-import Input from './input'
-import TodoApp from './To-Do';
+//import Input from './input'
+// import TodoApp from './To-Do';
+import ScratchPad from './scratchpad'
 
 class App extends React.Component {
- 
-  render () {
+
+  render() {
     return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-        <TodoApp />
-        </p>
-      </header>
-    </div>
-    )};
+      <div className="App">
+      <Navbar />
+        <header className="App-header">
+          <p>
+            <ScratchPad />
+          </p>
+        </header>
+      </div>
+    )
+  };
 }
 
 export default App;

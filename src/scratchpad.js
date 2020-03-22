@@ -1,6 +1,7 @@
 import React from 'react';
+import { waitForElementToBeRemoved } from '@testing-library/react';
 
-class TodoApp extends React.Component {
+class ScratchPad extends React.Component {
     constructor(props) {
         super(props);
         this.state = { items: [], text: '' };
@@ -12,8 +13,9 @@ class TodoApp extends React.Component {
     render() {
         return (
             <div>
-                <h2 className="text-left">TODAY</h2>
-                <TodoList type="checkbox" items={this.state.items} />
+                <h1 className="text-left">To-do</h1>
+                {/* <h5 className="text-left"><i>Most recent</i></h5> */}
+                <TodoList items={this.state.items} />
                 <form className="mb-5" onSubmit={this.handleSubmit}>
                     {/* <label htmlFor="new-todo" className="h4">
               I need to:
@@ -24,18 +26,18 @@ class TodoApp extends React.Component {
                         value={this.state.text}
                     />
                     <button className="rounded">
-                        To-do #{this.state.items.length + 1}
+                        Add #{this.state.items.length + 1}
                     </button>
                 </form>
             </div>
         );
     }
 
-    componentDidMount() {
-        this.setState({
-            items: JSON.parse(window.localStorage.items)
-        })
-    }
+    // componentDidMount() {
+    //     this.setState({
+    //         items: JSON.parse(window.localStorage.items)
+    //     })
+    // }
 
     handleChange(e) {
         this.setState({ text: e.target.value });
@@ -48,31 +50,38 @@ class TodoApp extends React.Component {
         }
         const newItem = {
             text: this.state.text,
-            id: Date.now()
+            id: Date.now(),
+            status: 'to-do',
         };
 
         const newArr = this.state.items.concat(newItem)
-        console.log(newArr)
         this.setState({
             items: newArr,
-            text: ''
+            text: '',
         });
 
         window.localStorage.setItem('items', JSON.stringify(newArr))
+    }
 
+    checkDone() {
+        ///When this is clicked, update 'status' to 'done'
     }
 }
+
+
 
 class TodoList extends React.Component {
     render() {
         return (
             <ul className="text-left">
                 {this.props.items.map(item => (
-                    <li type="checkbox" key={item.id}>{item.text}</li>
+                    <li key={item.id}>{item.text}</li>
                 ))}
             </ul>
         );
     }
+
 }
 
-export default TodoApp;
+export default ScratchPad;
+
