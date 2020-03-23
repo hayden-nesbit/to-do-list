@@ -60,11 +60,7 @@ class ScratchPad extends React.Component {
         window.localStorage.setItem('items', JSON.stringify(newArr))
     }
 
-    checkDone() {
-        this.setState({
-            status: 'done'
-        });
-    }
+    
     
 }
 
@@ -76,14 +72,24 @@ class ScratchPad extends React.Component {
 
 
 class TodoList extends React.Component {
-    
+    constructor(props) {
+        super(props);
+        this.checkDone = this.checkDone.bind(this);
+    }
+
+    checkDone(e) {
+        console.log(e.target.checked)
+        // this.setState({
+        //     status: 'done'
+        // });
+    }
 
     render() {
         return (
             <ul className="text-left list-unstyled px-3">
                 {this.props.items.map(item => (
                     <li key={item.id}>
-                        <input type="checkbox" onClick={this.checkDone}></input>
+                        <input type="checkbox" onChange={this.checkDone}></input>
                         {item.text}
                     </li>
                 ))}

@@ -13,9 +13,7 @@ class App extends React.Component {
       <div className="App">
       {/* <Navbar /> */}
         <header className="App-header">
-          <p>
             <ScratchPad />
-          </p>
         </header>
       </div>
     )
