@@ -20,6 +20,7 @@ class ScratchPad extends React.Component {
                         id="new-todo"
                         onChange={this.handleChange}
                         value={this.state.text}
+                        placeholder="I need to..."
                     />
                     <button className="rounded">
                         Add #{this.state.items.length + 1}
@@ -31,9 +32,10 @@ class ScratchPad extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({
-            items: JSON.parse(window.localStorage.items)
-        })
+        // // this.setState({
+        //     items: JSON.parse(window.localStorage.items)
+        // // })
+        //check to see if item exists in LS
     }
 
     handleChange(e) {
@@ -60,40 +62,47 @@ class ScratchPad extends React.Component {
         window.localStorage.setItem('items', JSON.stringify(newArr))
     }
 
-    
-    
 }
 
 // clearList() {
 //     ///When this is clicked, clear localStorage
 // }
 
-
-
-
-class TodoList extends React.Component {
+class TodoItem extends React.Component {
     constructor(props) {
         super(props);
         this.checkDone = this.checkDone.bind(this);
+        this.state = { checked: false }
     }
 
-    checkDone(e) {
-        console.log(e.target.checked)
-        // this.setState({
-        //     status: 'done'
-        // });
+    async checkDone(e) {
+        await this.setState({
+            checked: !this.state.checked
+        })
     }
 
     render() {
         return (
-            <ul className="text-left list-unstyled px-3">
-                {this.props.items.map(item => (
-                    <li key={item.id}>
-                        <input type="checkbox" onChange={this.checkDone}></input>
-                        {item.text}
-                    </li>
-                ))}
-            </ul>
+            <li>
+            <input type="checkbox" onClick={this.checkDone}></input>
+                {this.props.text}
+            </li>
+    )
+    }
+}
+
+
+class TodoList extends React.Component {
+
+    render() {
+        return (
+            <form>
+                <ul className="text-left list-unstyled px-3">
+                    {this.props.items.map(item => (
+                        <TodoItem key={item.id} id={item.id} text={item.text} />
+                    ))}
+                </ul>
+            </form>
         );
     }
 
