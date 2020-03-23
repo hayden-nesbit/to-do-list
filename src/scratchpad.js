@@ -5,10 +5,9 @@ import Views from './buttons'
 class ScratchPad extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { items: [], text: '', status: ''};
+        this.state = { items: [], text: '', status: '' };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-
     }
 
     render() {
@@ -62,27 +61,30 @@ class ScratchPad extends React.Component {
     }
 
     checkDone() {
-        console.log("function worked")
         this.setState({
             status: 'done'
-        })
+        });
     }
-
-    clearList() {
-        ///When this is clicked, clear localStorage
-    }
+    
 }
 
-    
+// clearList() {
+//     ///When this is clicked, clear localStorage
+// }
+
+
+
 
 class TodoList extends React.Component {
+    
+
     render() {
         return (
-            <ul className="text-left">
+            <ul className="text-left list-unstyled px-3">
                 {this.props.items.map(item => (
-                    <li key={item.id} class="list-unstyled">
-                    <input type="checkbox" onClick={this.checkDone}></input>
-                    {item.text}
+                    <li key={item.id}>
+                        <input type="checkbox" onClick={this.checkDone}></input>
+                        {item.text}
                     </li>
                 ))}
             </ul>
