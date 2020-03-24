@@ -44,10 +44,13 @@ class ToDoApp extends React.Component {
                 item.checked = checked
             }
             return item
+            //Here I have an array that changes the checked value of the clicked item to "checked"
+            //now I need to set the value of my "items" array to a filtered newItemsArr to only show non-checked items
+                //***essentially deleting the item from the view */
         })
 
         this.setState({
-            items: newItemsArr
+            items: newItemsArr.filter(item => (item.checked === false))
         })
     }
 
@@ -94,7 +97,8 @@ class ToDoApp extends React.Component {
             // 3. all array
         //split items array on map when checked value is changed to "true"
             //update LS
-        //delete that index out of "to-do" array and add to "done" array
+        //delete that item out of "to-do" array
+        //add/push deleted item to "done" array
             //update state and LS
         //have "all" array store all entries
     }
