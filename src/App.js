@@ -7,7 +7,7 @@ import AllList from './AllList'
 
 //import Input from './input'
 // import TodoApp from './To-Do';
-import ScratchPad from './scratchpad'
+import ToDoApp from './scratchpad'
 
 class App extends React.Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class App extends React.Component {
       
        
         <header className="App-header">
-        <ScratchPad /> 
+        <ToDoApp /> 
         <Views
         updateView={this.updateView}
       />

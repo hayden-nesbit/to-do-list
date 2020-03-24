@@ -3,13 +3,14 @@ import Views from './buttons'
 //import Card from './card'
 
 
-class ScratchPad extends React.Component {
+class ToDoApp extends React.Component {
     constructor(props) {
         super(props);
         this.state = { items: [], text: '', status: ''};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.changedCheck = this.changedCheck.bind(this);    }
+        this.changedCheck = this.changedCheck.bind(this);    
+    }
 
     render() {
         return (
@@ -32,15 +33,38 @@ class ScratchPad extends React.Component {
         );
     }
 
-    changedCheck() {
-        console.log("did I work")
+    changedCheck(id, checked) {
+       console.log("hello changeCheck")
+       console.log(id)
+       //take id and status of checked and update LS for item checked
+       //upon setState, save state to LS
+        // const singleItem = this.state.items.find(item => item.id === id)
+        // console.log(singleItem)
+        // singleItem.checked = checked;
+       
+        const newItemsArr = this.state.items.map((item, index) => {
+            if (item.id === id) {
+                item.checked = checked
+            }
+            return item
+        })
+        console.log(newItemsArr)
+
+       this.setState({
+            items: newItemsArr
+        })
+    }
+
+    componentDidUpdate() {
+        window.localStorage.setItem('todo', JSON.stringify(this.state.items))
     }
 
 
+    //this still has problems
     componentDidMount() {
-        if (window.localStorage.items) {
+        if (window.localStorage.todo) {
             this.setState({
-                items: JSON.parse(window.localStorage.items)
+                items: JSON.parse(window.localStorage.todo)
             })
         }
     }
@@ -57,6 +81,7 @@ class ScratchPad extends React.Component {
         const newItem = {
             text: this.state.text,
             id: Date.now(),
+            checked: false,
         };
 
         const newArr = this.state.items.concat(newItem)
@@ -85,7 +110,9 @@ class TodoItem extends React.Component {
         await this.setState({
             checked: !this.state.checked,
         })
-        this.props.newFunction()
+        console.log(this.props.id)
+
+        this.props.changeItem(this.props.id, this.state.checked)
     }
 
     
@@ -105,9 +132,9 @@ class TodoList extends React.Component {
         super(props);
     }
 
-    updateLocalStorage() {
-        this.props.changedCheck()
-        window.localStorage.setItem('items', JSON.stringify(this.props.items))
+    updateLocalStorage(id, checked) {
+        console.log({id, checked})
+        this.props.changedCheck(id, checked)
     }
 
     render() {
@@ -115,7 +142,11 @@ class TodoList extends React.Component {
             <form>
                 <ul className="text-left list-unstyled px-3">
                     {this.props.items.map(item => (
-                        <TodoItem newFunction={this.updateLocalStorage.bind(this)} key={item.id} id={item.id} text={item.text} />
+                        <TodoItem 
+                            changeItem={this.updateLocalStorage.bind(this)} 
+                            key={item.id} 
+                            id={item.id} 
+                            text={item.text} />
                     ))}
                 </ul>
             </form>
@@ -124,5 +155,5 @@ class TodoList extends React.Component {
 
 }
 
-export default ScratchPad;
+export default ToDoApp;
 
