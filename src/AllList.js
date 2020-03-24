@@ -1,5 +1,5 @@
 import React from 'react'
-import TodoItem from './scratchpad'
+import TodoItem from './ToDoApp'
 
 class AllList extends React.Component {
 

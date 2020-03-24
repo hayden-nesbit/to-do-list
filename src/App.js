@@ -7,13 +7,14 @@ import AllList from './AllList'
 
 //import Input from './input'
 // import TodoApp from './To-Do';
-import ToDoApp from './scratchpad'
+import ToDoApp from './ToDoApp'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = { currentView: "To-do" }
     this.updateView = this.updateView.bind(this)
+    //this.clearAll = this.clearAll.bind(this)
   }
 
   updateView(newView) {
