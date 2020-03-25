@@ -16,16 +16,17 @@ class ToDoApp extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.changedCheck = this.changedCheck.bind(this);
+        this.setView = this.setView.bind(this);
     }
 
     render() {
         // conditional rendering
         let tmpItems = this.state.items;
-        if(this.state.view === "inprogress"){
+        if (this.state.view === "inprogress") {
             tmpItems = this.state.inprogress;
         }
 
-        if(this.state.view === "done"){
+        if (this.state.view === "done") {
             tmpItems = this.state.done;
         }
         return (
@@ -43,9 +44,40 @@ class ToDoApp extends React.Component {
                         Add #{this.state.items.length + 1}
                     </button>
                 </form>
-
+                <div>
+                <Views onClick={this.setView}/>
+                <button onClick={this.clearList} className="btn btn-sm btn-outline-secondary px-4">Clear</button>
+                </div>
+                
             </div>
         );
+    }
+
+    //connect a function to my buttons that
+        // looks at the id of the button clicked
+        //change the view based on button id
+            //if the id is done, set the view to "done"
+            //if the id is inprogess, set the view to "inprogress"
+            //if the id is all, set the view to "all"
+    //set state with new view on each click
+
+    setView(e) {
+        //console.log(e)
+        e.preventDefault();
+        
+        if (e.target.id = "done") {
+            this.state.view = "done"
+        } 
+        if (e.target.id = "inprogress") {
+            this.state.view = "inprogress"
+        }
+        if (e.target.id = "all") {
+            this.state.view = "all"
+        }
+
+        this.setState({
+            view: this.state.view
+        })
     }
 
     changedCheck(id, checked) {
@@ -54,13 +86,9 @@ class ToDoApp extends React.Component {
                 item.checked = checked
             }
             return item
-            //Here I have an array that changes the checked value of the clicked item to "checked"
-            //now I need to set the value of my "items" array to a filtered newItemsArr to only show non-checked items
-                //***essentially deleting the item from the view */
         })
 
         this.setState({
-            // I need to filter newItemsArr to filter out any items that have been clicked (i.e. item.checked is true)
             items: newItemsArr,
             done: newItemsArr.filter(item => (item.checked === true)),
             inprogress: newItemsArr.filter(item => (item.checked === false))
@@ -69,12 +97,9 @@ class ToDoApp extends React.Component {
 
     componentDidUpdate() {
         window.localStorage.setItem('items', JSON.stringify(this.state.items))
-        // window.localStorage.setItem('done', JSON.stringify(this.state.done))
-        // window.localStorage.setItem('all', JSON.stringify(this.state.all))
     }
 
 
-    //this still has problems
     componentDidMount() {
         if (window.localStorage.items) {
             let items = JSON.parse(window.localStorage.items)
@@ -107,28 +132,14 @@ class ToDoApp extends React.Component {
             items: newArr,
             text: '',
         });
-
-        // window.localStorage.setItem('items', JSON.stringify(newArr))
-        // window.localStorage.setItem('done', JSON.stringify([]))
-        // window.localStorage.setItem('all', JSON.stringify([]))
-
-
-
-        //Need to add new empty array (2??) to local storage
-            // 1. items array
-            // 2. done array
-            // 3. all array
-        //split items array on map when checked value is changed to "true"
-            //update LS
-        //delete that item out of "to-do" array
-        //add/push deleted item to "done" array
-            //update state and LS
-        //have "all" array store all entries
     }
 
     clearList(e) {
         e.preventDefault();
-        window.localStorage.clear();
+        window.localStorage.clear()
+    //     this.setState({
+
+    //    })
     }
 }
 
@@ -147,7 +158,6 @@ class TodoItem extends React.Component {
         this.props.changeItem(this.props.id, this.state.checked)
     }
 
-
     render() {
         return (
             <li>
@@ -157,7 +167,6 @@ class TodoItem extends React.Component {
         )
     }
 }
-
 
 class TodoList extends React.Component {
     constructor(props) {
@@ -169,7 +178,6 @@ class TodoList extends React.Component {
     }
 
     render() {
-        // conditional rendering
         let tmpItems = this.props.items;
         return (
             <form>

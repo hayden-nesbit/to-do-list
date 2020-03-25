@@ -12,28 +12,28 @@ class Views extends React.Component {
                     <div className="col-6 offset-2">
                         <div className="row">
                         <div className="col-sm-4">
-                            <button onClick={this.props.updateView} className="btn btn-sm btn-outline-secondary px-4">
+                            <button id="all" className="btn btn-sm btn-outline-secondary px-4">
                                     All
                             </button>
                         </div>
                         <div className="col-sm-4">
-                            <button className="btn btn-sm btn-outline-secondary px-3">
+                            <button id="inprogress" className="btn btn-sm btn-outline-secondary px-3">
                                     To-do
                             </button>
                         </div>
                         <div className="col-sm-4">
-                            <button className="btn btn-sm btn-outline-secondary px-3">
+                            <button id="done" className="btn btn-sm btn-outline-secondary px-3">
                                     Done
                             </button>
                         </div>
                         </div>
-                        <div className="row">
+                        {/* <div className="row">
                             <div className="col-12">
-                            <button onClick={this.clearList} className="btn btn-sm btn-outline-secondary px-3">
+                            <button id="clear" className="btn btn-sm btn-outline-secondary px-3">
                                     Clear
                             </button>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
 
                 </div>
