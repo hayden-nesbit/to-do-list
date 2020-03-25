@@ -1,5 +1,6 @@
 import React from 'react';
 import Views from './buttons'
+import './ToDoApp.css'
 //import Card from './card'
 
 
@@ -17,6 +18,7 @@ class ToDoApp extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.changedCheck = this.changedCheck.bind(this);
         this.setView = this.setView.bind(this);
+        this.clearList = this.clearList.bind(this);
     }
 
     render() {
@@ -45,7 +47,7 @@ class ToDoApp extends React.Component {
                     </button>
                 </form>
                 <div>
-                <Views onClick={this.setView}/>
+                <Views updateView={this.setView}/>
                 <button onClick={this.clearList} className="btn btn-sm btn-outline-secondary px-4">Clear</button>
                 </div>
                 
@@ -62,21 +64,23 @@ class ToDoApp extends React.Component {
     //set state with new view on each click
 
     setView(e) {
-        //console.log(e)
+        console.log(e)
         e.preventDefault();
         
-        if (e.target.id = "done") {
-            this.state.view = "done"
+        let tempView = 'all'
+
+        if (e.target.id == "done") {
+            tempView = "done"
         } 
-        if (e.target.id = "inprogress") {
-            this.state.view = "inprogress"
+        if (e.target.id == "inprogress") {
+            tempView = "inprogress"
         }
-        if (e.target.id = "all") {
-            this.state.view = "all"
+        if (e.target.id == "all") {
+            tempView = "all"
         }
 
         this.setState({
-            view: this.state.view
+            view: tempView
         })
     }
 
@@ -136,10 +140,9 @@ class ToDoApp extends React.Component {
 
     clearList(e) {
         e.preventDefault();
-        window.localStorage.clear()
-    //     this.setState({
-
-    //    })
+        this.setState({
+            items: []
+        })
     }
 }
 
@@ -160,10 +163,12 @@ class TodoItem extends React.Component {
 
     render() {
         return (
-            <li>
-                <input type="checkbox" onClick={this.checkDone}></input>
-                {this.props.text}
-            </li>
+            <div className="appField">
+                <li>
+                    <input type="checkbox" onClick={this.checkDone}></input>
+                    {this.props.text}
+                </li>
+            </div>
         )
     }
 }
