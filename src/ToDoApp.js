@@ -33,6 +33,7 @@ class ToDoApp extends React.Component {
                         Add #{this.state.items.length + 1}
                     </button>
                 </form>
+                <Views />
 
             </div>
         );

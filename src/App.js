@@ -28,9 +28,9 @@ class App extends React.Component {
        
         <header className="App-header">
         <ToDoApp /> 
-        <Views
+        {/* <Views
         updateView={this.updateView}
-      />
+      /> */}
             
         </header>
         
