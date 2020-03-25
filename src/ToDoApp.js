@@ -9,8 +9,9 @@ class ToDoApp extends React.Component {
         this.state = {
             items: [],
             done: [],
-            all: [],
             text: '',
+            view: 'all',
+            inprogress: [],
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -18,10 +19,19 @@ class ToDoApp extends React.Component {
     }
 
     render() {
+        // conditional rendering
+        let tmpItems = this.state.items;
+        if(this.state.view === "inprogress"){
+            tmpItems = this.state.inprogress;
+        }
+
+        if(this.state.view === "done"){
+            tmpItems = this.state.done;
+        }
         return (
             <div>
                 <h1 className="text-left">To-do</h1>
-                <TodoList changedCheck={this.changedCheck} items={this.state.items} />
+                <TodoList changedCheck={this.changedCheck} items={tmpItems} />
                 <form className="mb-5" onSubmit={this.handleSubmit}>
                     <input
                         id="new-todo"
@@ -52,27 +62,28 @@ class ToDoApp extends React.Component {
 
         this.setState({
             // I need to filter newItemsArr to filter out any items that have been clicked (i.e. item.checked is true)
-            items: newItemsArr.filter(item => (item.checked === false)),
-            // done: newItemsArr.filter(item => (item.checked === true)),
-            all: newItemsArr
+            items: newItemsArr,
+            done: newItemsArr.filter(item => (item.checked === true)),
+            inprogress: newItemsArr.filter(item => (item.checked === false))
         })
     }
 
     componentDidUpdate() {
         window.localStorage.setItem('items', JSON.stringify(this.state.items))
-        window.localStorage.setItem('done', JSON.stringify(this.state.done))
-        window.localStorage.setItem('all', JSON.stringify(this.state.all))
+        // window.localStorage.setItem('done', JSON.stringify(this.state.done))
+        // window.localStorage.setItem('all', JSON.stringify(this.state.all))
     }
 
 
     //this still has problems
     componentDidMount() {
         if (window.localStorage.items) {
-            var newItemsArr = JSON.parse(window.localStorage.all)
+            let items = JSON.parse(window.localStorage.items)
             this.setState({
-                items: JSON.parse(window.localStorage.items),
-                done: newItemsArr.filter(item => (item.checked === true)),
-                all: JSON.parse(window.localStorage.all),
+                items: items,
+                done: items.filter(item => (item.checked === true)),
+                inprogress: items.filter(item => (item.checked === false)),
+                view: 'all'
             })
         }
     }
@@ -159,10 +170,12 @@ class TodoList extends React.Component {
     }
 
     render() {
+        // conditional rendering
+        let tmpItems = this.props.items;
         return (
             <form>
                 <ul className="text-left list-unstyled px-3">
-                    {this.props.items.map(item => (
+                    {tmpItems.map(item => (
                         <TodoItem
                             changeItem={this.updateLocalStorage.bind(this)}
                             key={item.id}
