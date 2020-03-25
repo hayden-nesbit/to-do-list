@@ -43,7 +43,6 @@ class ToDoApp extends React.Component {
                         Add #{this.state.items.length + 1}
                     </button>
                 </form>
-                <Views />
 
             </div>
         );
@@ -170,6 +169,7 @@ class TodoList extends React.Component {
     }
 
     render() {
+        // conditional rendering
         let tmpItems = this.props.items;
         return (
             <form>
@@ -189,4 +189,3 @@ class TodoList extends React.Component {
 }
 
 export default ToDoApp;
-
