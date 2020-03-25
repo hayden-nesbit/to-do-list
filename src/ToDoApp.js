@@ -13,6 +13,7 @@ class ToDoApp extends React.Component {
             text: '',
             view: 'all',
             inprogress: [],
+            title: 'To-do' 
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,7 +34,8 @@ class ToDoApp extends React.Component {
         }
         return (
             <div>
-                <h1 className="text-left">To-do</h1>
+                <button onClick={this.clearList} className="btn btn-sm btn-outline-secondary px-3 float-right mr-3">Clear</button>
+                <h1 className="text-left">{this.state.title}</h1>
                 <TodoList changedCheck={this.changedCheck} items={tmpItems} />
                 <form className="mb-5" onSubmit={this.handleSubmit}>
                     <input
@@ -46,41 +48,33 @@ class ToDoApp extends React.Component {
                         Add #{this.state.items.length + 1}
                     </button>
                 </form>
-                <div>
                 <Views updateView={this.setView}/>
-                <button onClick={this.clearList} className="btn btn-sm btn-outline-secondary px-4">Clear</button>
-                </div>
-                
             </div>
         );
     }
 
-    //connect a function to my buttons that
-        // looks at the id of the button clicked
-        //change the view based on button id
-            //if the id is done, set the view to "done"
-            //if the id is inprogess, set the view to "inprogress"
-            //if the id is all, set the view to "all"
-    //set state with new view on each click
-
     setView(e) {
-        console.log(e)
         e.preventDefault();
         
         let tempView = 'all'
+        let tempTitle = 'To-do'
 
         if (e.target.id == "done") {
             tempView = "done"
+            tempTitle = "Done"
         } 
-        if (e.target.id == "inprogress") {
+        else if (e.target.id == "inprogress") {
             tempView = "inprogress"
+            tempTitle = "To-do"
         }
-        if (e.target.id == "all") {
+        else if (e.target.id == "all") {
             tempView = "all"
+            tempTitle = "All items"
         }
 
         this.setState({
-            view: tempView
+            view: tempView,
+            title: tempTitle
         })
     }
 
@@ -141,7 +135,8 @@ class ToDoApp extends React.Component {
     clearList(e) {
         e.preventDefault();
         this.setState({
-            items: []
+            items: [],
+            done: []
         })
     }
 }
