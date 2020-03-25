@@ -170,7 +170,6 @@ class TodoList extends React.Component {
     }
 
     render() {
-        // conditional rendering
         let tmpItems = this.props.items;
         return (
             <form>
