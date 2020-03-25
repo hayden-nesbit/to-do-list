@@ -50,20 +50,28 @@ class ToDoApp extends React.Component {
         })
 
         this.setState({
-            items: newItemsArr.filter(item => (item.checked === false))
+            // I need to filter newItemsArr to filter out any items that have been clicked (i.e. item.checked is true)
+            items: newItemsArr.filter(item => (item.checked === false)),
+            // done: newItemsArr.filter(item => (item.checked === true)),
+            all: newItemsArr
         })
     }
 
     componentDidUpdate() {
-        window.localStorage.setItem('todo', JSON.stringify(this.state.items))
+        window.localStorage.setItem('items', JSON.stringify(this.state.items))
+        window.localStorage.setItem('done', JSON.stringify(this.state.done))
+        window.localStorage.setItem('all', JSON.stringify(this.state.all))
     }
 
 
     //this still has problems
     componentDidMount() {
         if (window.localStorage.items) {
+            var newItemsArr = JSON.parse(window.localStorage.all)
             this.setState({
-                items: JSON.parse(window.localStorage.items)
+                items: JSON.parse(window.localStorage.items),
+                done: newItemsArr.filter(item => (item.checked === true)),
+                all: JSON.parse(window.localStorage.all),
             })
         }
     }
@@ -89,7 +97,11 @@ class ToDoApp extends React.Component {
             text: '',
         });
 
-        window.localStorage.setItem('items', JSON.stringify(newArr))
+        // window.localStorage.setItem('items', JSON.stringify(newArr))
+        // window.localStorage.setItem('done', JSON.stringify([]))
+        // window.localStorage.setItem('all', JSON.stringify([]))
+
+
 
         //Need to add new empty array (2??) to local storage
             // 1. items array
