@@ -1,3 +1,12 @@
 p {
     font-size: 15px;
 }
+
+li {
+    font-size: 20px;
+}
+
+.list {
+    min-height: 200px;
+    overflow: scroll;
+}

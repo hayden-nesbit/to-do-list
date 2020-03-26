@@ -9,11 +9,9 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="App-header">
+          <div className="App-header">
           <ToDoApp />
         </div>
-      </div>
     )
   };
 }

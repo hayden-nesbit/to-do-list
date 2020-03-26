@@ -32,17 +32,21 @@ class ToDoApp extends React.Component {
 
         return (
             <div>
-                <button onClick={this.clearList} className="btn btn-sm btn-outline-secondary px-3 float-right mr-3">Clear</button>
-                <button onClick={this.selectAll} className="btn btn-sm btn-outline-warning px-3 float-right">Select all</button>
-                <h1 className="text-left">{this.state.title}</h1>
-                <TodoList changedCheck={this.changedCheck} items={tmpItems} />
-                <form className="mb-5" onSubmit={this.handleSubmit}>
+                <div className="d-flex justify-content-between">
+                    <button onClick={this.selectAll} className="btn btn-sm btn-outline-warning px-3 float-right">Complete all</button>
+                    <button onClick={this.clearList} className="btn btn-sm btn-outline-secondary px-3 float-right">Clear</button>
+                </div>
+                <form className="mt-3" onSubmit={this.handleSubmit}>
                     <div className="input-group mb-3">
                         <input type="text" className="form-control" placeholder="I need to..." id="button-addon2" onChange={this.handleChange} value={this.state.text}></input>
-                            <button onClick={this.handleSubmit} className="btn btn-outline-secondary" type="button" id="button-addon2">Add #{tmpItems.length + 1}</button>
+                        <button onClick={this.handleSubmit} className="btn btn-outline-secondary" type="button" id="button-addon2">Add #{tmpItems.length + 1}</button>
                     </div>
-                    <p className="mt-3 text-center">Items remaining: {tmpItems.length}</p>
                 </form>
+                <h1 className="text-left">{this.state.title}</h1>
+                <div className="list">
+                    <TodoList changedCheck={this.changedCheck} items={tmpItems} />
+                </div>
+                <p className="mt-3 text-center">Items remaining: {tmpItems.length}</p>
                 <Views updateView={this.setView} />
             </div>
         );
@@ -133,9 +137,13 @@ class ToDoApp extends React.Component {
     }
 
     selectAll(e) {
-        //console.log(e)
         e.preventDefault();
-        this.items.checked = "true"
+        const selectAll = this.state.items.map((item) => {
+            item.checked = true
+        })
+        this.setState({
+            item: selectAll
+        })
     }
 }
 
