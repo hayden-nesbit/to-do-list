@@ -149,15 +149,15 @@ class ToDoApp extends React.Component {
             <div>
                 <div className="d-flex justify-content-between">
                     <button onClick={this.selectAll} className="btn btn-sm btn-outline-warning px-3 float-right">{this.switchBtn}</button>
-                    <button onClick={this.clearList} className="btn btn-sm btn-outline-secondary px-3 float-right">Clear</button>
+                    <button onClick={this.clearList} className="btn btn-sm btn-outline-light px-3 float-right">Clear</button>
                 </div>
                 <form className="mt-3" onSubmit={this.handleSubmit}>
                     <div className="input-group mb-3">
                         <input type="text" className="form-control" placeholder="I need to..." id="button-addon2" onChange={this.handleChange} value={this.state.text}></input>
-                        <button onClick={this.handleSubmit} className="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        <button onClick={this.handleSubmit} className="btn btn-outline-light" type="button" id="button-addon2"><i class="fa fa-plus" aria-hidden="true"></i></button>
                     </div>
                 </form>
-                <h1 className="text-left">{this.state.title}</h1>
+                <h1 className="text-left text-warning">{this.state.title}</h1>
                 <div className="list">
                     <TodoList changedCheck={this.changedCheck} items={tmpItems} />
                 </div>
