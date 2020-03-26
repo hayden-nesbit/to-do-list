@@ -7,6 +7,6 @@ li {
 }
 
 .list {
-    min-height: 200px;
+    min-height: 250px;
     overflow: scroll;
 }
