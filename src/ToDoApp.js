@@ -32,6 +32,7 @@ class ToDoApp extends React.Component {
         if (this.state.view === "done") {
             tmpItems = this.state.done;
         }
+
         return (
             <div>
                 <button onClick={this.clearList} className="btn btn-sm btn-outline-secondary px-3 float-right mr-3">Clear</button>
@@ -47,6 +48,7 @@ class ToDoApp extends React.Component {
                     <button className="rounded">
                         Add #{this.state.items.length + 1}
                     </button>
+                    <p className="mt-3">Items remaining: {this.state.inprogress.length}</p>
                 </form>
                 <Views updateView={this.setView}/>
             </div>
@@ -158,7 +160,7 @@ class TodoItem extends React.Component {
     }
 
     render() {
-        //variable to check if done  this.props.state?
+        //variable to check if done 
         return (
             <div className="appField">
                 <li>
