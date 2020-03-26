@@ -9,10 +9,8 @@ class ToDoApp extends React.Component {
         super(props);
         this.state = {
             items: [],
-            done: [],
             text: '',
-            view: 'all',
-            inprogress: [],
+            view: 'inprogress',
             title: 'To-do' 
         };
         this.handleChange = this.handleChange.bind(this);
@@ -23,14 +21,13 @@ class ToDoApp extends React.Component {
     }
 
     render() {
-        // conditional rendering
         let tmpItems = this.state.items;
         if (this.state.view === "inprogress") {
-            tmpItems = this.state.inprogress;
+            tmpItems = this.state.items.filter(item => (item.checked === false))
         }
 
         if (this.state.view === "done") {
-            tmpItems = this.state.done;
+            tmpItems = this.state.items.filter(item => (item.checked === true))
         }
 
         return (
@@ -48,17 +45,17 @@ class ToDoApp extends React.Component {
                     <button className="rounded">
                         Add #{this.state.items.length + 1}
                     </button>
-                    <p className="mt-3">Items remaining: {this.state.inprogress.length}</p>
+                    <p className="mt-3">Items remaining: {tmpItems.length}</p>
                 </form>
                 <Views updateView={this.setView}/>
             </div>
         );
     }
 
-    setView(e) {
+    async setView(e) {
         e.preventDefault();
         
-        let tempView = 'all'
+        let tempView = 'inprogress'
         let tempTitle = 'To-do'
 
         if (e.target.id == "done") {
@@ -74,7 +71,7 @@ class ToDoApp extends React.Component {
             tempTitle = "All items"
         }
 
-        this.setState({
+        await this.setState({
             view: tempView,
             title: tempTitle
         })
@@ -90,8 +87,6 @@ class ToDoApp extends React.Component {
 
         this.setState({
             items: newItemsArr,
-            done: newItemsArr.filter(item => (item.checked === true)),
-            inprogress: newItemsArr.filter(item => (item.checked === false))
         })
     }
 
@@ -105,9 +100,7 @@ class ToDoApp extends React.Component {
             let items = JSON.parse(window.localStorage.items)
             this.setState({
                 items: items,
-                done: items.filter(item => (item.checked === true)),
-                inprogress: items.filter(item => (item.checked === false)),
-                view: 'all'
+                view: 'inprogress'
             })
         }
     }
