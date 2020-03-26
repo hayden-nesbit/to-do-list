@@ -1,7 +1,6 @@
 import React from 'react';
 import Views from './buttons'
 import './ToDoApp.css'
-//import Card from './card'
 
 
 class ToDoApp extends React.Component {
@@ -11,13 +10,14 @@ class ToDoApp extends React.Component {
             items: [],
             text: '',
             view: 'inprogress',
-            title: 'To-do' 
+            title: 'To-do'
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.changedCheck = this.changedCheck.bind(this);
         this.setView = this.setView.bind(this);
         this.clearList = this.clearList.bind(this);
+        this.selectAll = this.selectAll.bind(this);
     }
 
     render() {
@@ -33,35 +33,32 @@ class ToDoApp extends React.Component {
         return (
             <div>
                 <button onClick={this.clearList} className="btn btn-sm btn-outline-secondary px-3 float-right mr-3">Clear</button>
+                <button onClick={this.selectAll} className="btn btn-sm btn-outline-warning px-3 float-right">Select all</button>
                 <h1 className="text-left">{this.state.title}</h1>
                 <TodoList changedCheck={this.changedCheck} items={tmpItems} />
                 <form className="mb-5" onSubmit={this.handleSubmit}>
-                    <input
-                        id="new-todo"
-                        onChange={this.handleChange}
-                        value={this.state.text}
-                        placeholder="I need to..."
-                    />
-                    <button className="rounded">
-                        Add #{this.state.items.length + 1}
-                    </button>
-                    <p className="mt-3">Items remaining: {tmpItems.length}</p>
+                    <div className="input-group mb-3">
+                        <input type="text" className="form-control" placeholder="I need to..." onChange={this.handleChange} value={this.state.text}></input>
+                        <div className="input-group-append">
+                            <button className="btn btn-outline-secondary" type="button" id="button-addon2">Add #{tmpItems.length + 1}</button>
+                        </div>
+                    </div>
                 </form>
-                <Views updateView={this.setView}/>
+                <Views updateView={this.setView} />
             </div>
         );
     }
 
     async setView(e) {
         e.preventDefault();
-        
+
         let tempView = 'inprogress'
         let tempTitle = 'To-do'
 
         if (e.target.id == "done") {
             tempView = "done"
             tempTitle = "Done"
-        } 
+        }
         else if (e.target.id == "inprogress") {
             tempView = "inprogress"
             tempTitle = "To-do"
@@ -135,6 +132,12 @@ class ToDoApp extends React.Component {
             inprogress: [],
         })
     }
+
+    selectAll(e) {
+        //console.log(e)
+        e.preventDefault();
+        this.items.checked = "true"
+    }
 }
 
 class TodoItem extends React.Component {
@@ -153,7 +156,7 @@ class TodoItem extends React.Component {
     }
 
     render() {
-        //variable to check if done 
+
         return (
             <div className="appField">
                 <li>
