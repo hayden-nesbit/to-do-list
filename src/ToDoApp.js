@@ -64,12 +64,12 @@ class ToDoApp extends React.Component {
         }
         else if (e.target.id == "all") {
             tempView = "all"
-            tempTitle = "All items"
+            tempTitle = "All"
         }
 
         await this.setState({
             view: tempView,
-            title: tempTitle
+            title: tempTitle,
         })
     }
 
@@ -154,12 +154,17 @@ class TodoItem extends React.Component {
         this.props.changeItem(this.props.id, this.state.checked)
     }
 
-    render() {
+    componentDidMount() {
+        this.setState({
+            checked: this.props.checked
+        })
+    }
 
+    render() {
         return (
             <div className="appField">
                 <li>
-                    <input type="checkbox" onClick={this.checkDone}></input>
+                    <input type="checkbox" checked={this.state.checked} onChange={this.checkDone}></input>
                     {this.props.text}
                 </li>
             </div>
@@ -186,7 +191,8 @@ class TodoList extends React.Component {
                             changeItem={this.updateLocalStorage.bind(this)}
                             key={item.id}
                             id={item.id}
-                            text={item.text} />
+                            text={item.text}
+                            checked={item.checked} />
                     ))}
                 </ul>
             </form>
