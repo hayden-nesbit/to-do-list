@@ -107,11 +107,19 @@ class ToDoApp extends React.Component {
 
     selectAll(e) {
         e.preventDefault();
+
+        let switchBtn = "Complete all"
         const selectAll = this.state.items.map((item) => {
-            item.checked = true
+            if(item.checked === false) {
+                item.checked = true
+                switchBtn = "Complete all"
+            } else if (item.checked === true) {
+                item.checked = false
+                switchBtn = "Restore all"
+            }
+            
         })
 
-        // switchBtn = "Restore all"
 
         this.setState({
             item: selectAll
@@ -137,12 +145,10 @@ class ToDoApp extends React.Component {
             tmpNote = "Items remaining: " + tmpItems.length
         }
 
-        let switchBtn = "Complete all"
-
         return (
             <div>
                 <div className="d-flex justify-content-between">
-                    <button onClick={this.selectAll} className="btn btn-sm btn-outline-primary px-3 float-right">{switchBtn}</button>
+                    <button onClick={this.selectAll} className="btn btn-sm btn-outline-warning px-3 float-right">{this.props.switchBtn}</button>
                     <button onClick={this.clearList} className="btn btn-sm btn-outline-secondary px-3 float-right">Clear</button>
                 </div>
                 <form className="mt-3" onSubmit={this.handleSubmit}>
