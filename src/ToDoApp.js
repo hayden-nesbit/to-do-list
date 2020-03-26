@@ -38,11 +38,10 @@ class ToDoApp extends React.Component {
                 <TodoList changedCheck={this.changedCheck} items={tmpItems} />
                 <form className="mb-5" onSubmit={this.handleSubmit}>
                     <div className="input-group mb-3">
-                        <input type="text" className="form-control" placeholder="I need to..." onChange={this.handleChange} value={this.state.text}></input>
-                        <div className="input-group-append">
-                            <button className="btn btn-outline-secondary" type="button" id="button-addon2">Add #{tmpItems.length + 1}</button>
-                        </div>
+                        <input type="text" className="form-control" placeholder="I need to..." id="button-addon2" onChange={this.handleChange} value={this.state.text}></input>
+                            <button onClick={this.handleSubmit} className="btn btn-outline-secondary" type="button" id="button-addon2">Add #{tmpItems.length + 1}</button>
                     </div>
+                    <p className="mt-3 text-center">Items remaining: {tmpItems.length}</p>
                 </form>
                 <Views updateView={this.setView} />
             </div>
