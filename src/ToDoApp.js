@@ -136,7 +136,8 @@ class ToDoApp extends React.Component {
         e.preventDefault();
         this.setState({
             items: [],
-            done: []
+            done: [],
+            inprogress: [],
         })
     }
 }
@@ -157,6 +158,7 @@ class TodoItem extends React.Component {
     }
 
     render() {
+        //variable to check if done  this.props.state?
         return (
             <div className="appField">
                 <li>

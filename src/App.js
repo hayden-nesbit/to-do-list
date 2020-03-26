@@ -12,13 +12,6 @@ import ToDoApp from './ToDoApp'
 class App extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { currentView: "To-do" }
-    this.updateView = this.updateView.bind(this)
-    //this.clearAll = this.clearAll.bind(this)
-  }
-
-  updateView(newView) {
-    this.setState({ currentView: newView })
   }
 
   render() {
@@ -27,11 +20,7 @@ class App extends React.Component {
       
        
         <header className="App-header">
-        <ToDoApp /> 
-        {/* <Views
-        updateView={this.updateView}
-      /> */}
-            
+        <ToDoApp />  
         </header>
         
         

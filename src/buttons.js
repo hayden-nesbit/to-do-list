@@ -9,36 +9,23 @@ class Views extends React.Component {
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col-6 offset-2">
-                        <div className="row">
-                        <div className="col-sm-4">
-                            <button onClick={this.props.updateView} id="all" className="btn btn-sm btn-outline-secondary px-4">
+                        <div className="col-md-4">
+                            <button onClick={this.props.updateView} id="all" className="btn btn-sm btn-outline-warning px-4">
                                     All
                             </button>
                         </div>
-                        <div className="col-sm-4">
-                            <button onClick={this.props.updateView} id="inprogress" className="btn btn-sm btn-outline-secondary px-3">
+                        <div className="col-md-4">
+                            <button onClick={this.props.updateView} id="inprogress" className="btn btn-sm btn-outline-warning px-3">
                                     To-do
                             </button>
                         </div>
-                        <div className="col-sm-4">
-                            <button onClick={this.props.updateView} id="done" className="btn btn-sm btn-outline-secondary px-3">
+                        <div className="col-md-4">
+                            <button onClick={this.props.updateView} id="done" className="btn btn-sm btn-outline-warning px-3">
                                     Done
                             </button>
                         </div>
                         </div>
-                        {/* <div className="row">
-                            <div className="col-12">
-                            <button id="clear" className="btn btn-sm btn-outline-secondary px-3">
-                                    Clear
-                            </button>
-                            </div>
-                        </div> */}
                     </div>
-
-                </div>
-
-            </div>
         )
     }
 }
