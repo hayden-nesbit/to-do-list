@@ -19,6 +19,7 @@ class ToDoApp extends React.Component {
         this.setView = this.setView.bind(this);
         this.clearList = this.clearList.bind(this);
         this.selectAll = this.selectAll.bind(this);
+        this.switchBtn = "Complete all"
     }
 
     async setView(e) {
@@ -108,21 +109,19 @@ class ToDoApp extends React.Component {
     selectAll(e) {
         e.preventDefault();
 
-        let switchBtn = "Complete all"
         const selectAll = this.state.items.map((item) => {
             if(item.checked === false) {
                 item.checked = true
-                switchBtn = "Complete all"
+                this.switchBtn = "Restore all"
             } else if (item.checked === true) {
                 item.checked = false
-                switchBtn = "Restore all"
-            }
-            
+                this.switchBtn = "Complete all"
+            } 
         })
 
-
         this.setState({
-            item: selectAll
+            item: selectAll,
+            switch: this.switchBtn
         })
     }
 
@@ -145,10 +144,11 @@ class ToDoApp extends React.Component {
             tmpNote = "Items remaining: " + tmpItems.length
         }
 
+
         return (
             <div>
                 <div className="d-flex justify-content-between">
-                    <button onClick={this.selectAll} className="btn btn-sm btn-outline-warning px-3 float-right">{this.props.switchBtn}</button>
+                    <button onClick={this.selectAll} className="btn btn-sm btn-outline-warning px-3 float-right">{this.switchBtn}</button>
                     <button onClick={this.clearList} className="btn btn-sm btn-outline-secondary px-3 float-right">Clear</button>
                 </div>
                 <form className="mt-3" onSubmit={this.handleSubmit}>
