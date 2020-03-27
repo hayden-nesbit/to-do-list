@@ -6,7 +6,8 @@ li {
     font-size: 20px;
 }
 
-.list {
+div.list {
     min-height: 250px;
-    overflow: scroll;
+    max-height: 250px;
+    overflow: auto;
 }
